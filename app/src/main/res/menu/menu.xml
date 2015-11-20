@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_previous"
+        android:icon="@mipmap/ic_chevron_left_black_24dp"
+        android:title="@string/previous_strip"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_select"
+        android:icon="@mipmap/ic_date_range_black_24dp"
+        android:title="@string/select_strip"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_next"
+        android:icon="@mipmap/ic_chevron_right_black_24dp"
+        android:title="@string/next_strip"
+        app:showAsAction="ifRoom"/>
+</menu>
