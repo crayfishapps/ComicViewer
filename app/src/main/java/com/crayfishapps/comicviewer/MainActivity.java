@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -161,8 +162,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             if (scaling > 2000) {
                 scaling = 2000;
             }
-            Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() * scaling / 1000, bitmap.getHeight() * scaling / 1000, true);
-            imageview.setImageBitmap(bitmapScaled); ;
+            if (bitmap == null) {
+                Toast.makeText(getApplicationContext(), "Connection problem", Toast.LENGTH_SHORT).show();
+            } else {
+                Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() * scaling / 1000, bitmap.getHeight() * scaling / 1000, true);
+                imageview.setImageBitmap(bitmapScaled);
+            }
         }
     }
 
