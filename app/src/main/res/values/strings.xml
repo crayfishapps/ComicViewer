@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ComicViewer</string>
-    <string name="previous_strip">Previous strip</string>
-    <string name="select_strip">Select strip</string>
-    <string name="next_strip">Next strip</string>
+    <string name="print">Print comic strip</string>
+    <string name="previous_strip">Previous comic strip</string>
+    <string name="select_strip">Select date</string>
+    <string name="next_strip">Next comic strip</string>
     <string name="comic_strip">Comic strip</string>
 </resources>

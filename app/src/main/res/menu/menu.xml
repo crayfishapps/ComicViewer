@@ -5,15 +5,20 @@
         android:id="@+id/action_previous"
         android:icon="@mipmap/ic_chevron_left_black_24dp"
         android:title="@string/previous_strip"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_select"
         android:icon="@mipmap/ic_date_range_black_24dp"
         android:title="@string/select_strip"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_next"
         android:icon="@mipmap/ic_chevron_right_black_24dp"
         android:title="@string/next_strip"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_print"
+        android:icon="@mipmap/ic_print_black_24dp"
+        android:title="@string/print"
         app:showAsAction="ifRoom"/>
 </menu>

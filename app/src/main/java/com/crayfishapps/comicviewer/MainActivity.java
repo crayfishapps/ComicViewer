@@ -2,7 +2,9 @@ package com.crayfishapps.comicviewer;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.support.v4.print.PrintHelper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private static final String SELECTED_DATE = "selected_date";
 
+    private ActionBar actionBar;
+
     private Calendar actualDate;    // holds the selected day
     private Calendar minDate;       // the day of the first Dilbert strip
     private Calendar maxDate;       // today
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         setContentView(R.layout.activity_main);
 
         // setup action bar to show logo and title bar
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
 
         // initiate calendars
@@ -95,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     actualDate.add(Calendar.DAY_OF_MONTH, 1);
                 }
                 loadImage(actualDate);
+                return true;
+
+            // Print the selected comic strip
+            case R.id.action_print:
+                doPhotoPrint();
                 return true;
 
             default:
@@ -177,8 +186,24 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
         // compose URL
-        String date = "dilbert.com/strip/" + year + "-" + String.format("%02d", (month+1)) + "-" + String.format("%02d", dayOfMonth);
-        new ParseURL().execute("http://" + date);
+        String date = year + "-" + String.format("%02d", (month+1)) + "-" + String.format("%02d", dayOfMonth);
+        actionBar.setTitle("  " + date);
+
+        String dilbertURL = "dilbert.com/strip/" + date;
+        new ParseURL().execute("http://" + dilbertURL);
+    }
+
+    private void doPhotoPrint() {
+        int year = actualDate.get(Calendar.YEAR);
+        int month = actualDate.get(Calendar.MONTH);
+        int dayOfMonth = actualDate.get(Calendar.DAY_OF_MONTH);
+        String date = year + "-" + String.format("%02d", (month+1)) + "-" + String.format("%02d", dayOfMonth);
+
+        PrintHelper photoPrinter = new PrintHelper(this);
+        photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+        ImageView imageview = (ImageView) findViewById(R.id.imageViewStrip);
+        Bitmap bitmap = ((BitmapDrawable)imageview.getDrawable()).getBitmap();
+        photoPrinter.printBitmap(date, bitmap);
     }
 
 }
